@@ -5,7 +5,7 @@
 // run) once you have them. Until then this project renders with text-only
 // components so nothing breaks.
 
-import streakon1 from "../../../assets/images/projects/streakon/streakon-1.webp";
+import streakon1 from "../../../assets/images/projects/showcase/abb-cell.svg";
 
 import type { ProjectContent } from "../../types";
 
@@ -16,10 +16,27 @@ export default {
   videoBorder: false,
   description:
     "A simulated robotic pick-and-place application built in ABB RobotStudio, programmed in RAPID.<br/><br/>The cell uses Smart Components to model grippers and sensors, with MoveL and MoveJ motion instructions sequencing pick, transfer, and place operations between stations.",
+  caseStudy: {
+    category: "Robotics",
+    period: "Jan 2025 — May 2025",
+    status: "completed",
+    overview:
+      "A simulated robot cell that transfers parts from a conveyor to a placement station, with coordinated robot motion and station I/O.",
+    problem:
+      "The pick-and-place cycle needs coordinated part handling, robot motion and signal states to run predictably from feed to placement.",
+    solution:
+      "Configured the cell in ABB RobotStudio, modelled gripper and sensor behaviour with Smart Components, and programmed the sequence in RAPID using MoveL and MoveJ instructions.",
+    process:
+      "Set up the station and targets, modelled the handling sequence, mapped the required I/O states, then reviewed the motion and recovery steps in simulation.",
+    results:
+      "Completed a repeatable simulated pick, transfer and place sequence with sensor feedback and basic error-recovery logic.",
+    technologies: ["RAPID", "Robotics", "PLC I/O"],
+    tools: ["ABB RobotStudio", "RAPID", "Smart Components"],
+  },
   heroImage: {
     src: streakon1,
-    alt: "ABB RobotStudio pick-and-place banner",
-    caption: "ABB RobotStudio pick-and-place cell simulation",
+    alt: "Illustrative diagram of the ABB robotic pick-and-place cell",
+    caption: "Illustrative cell layout based on the project description",
   },
   components: [
     {
@@ -27,8 +44,8 @@ export default {
       props: {
         type: "image",
         src: streakon1,
-        alt: "ABB RobotStudio pick-and-place banner",
-        caption: "ABB RobotStudio pick-and-place cell simulation",
+        alt: "Illustrative diagram of the ABB robotic pick-and-place cell",
+        caption: "Illustrative cell layout based on the project description",
       },
     },
     {

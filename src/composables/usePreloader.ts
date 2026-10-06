@@ -1,4 +1,4 @@
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 import { resources } from "../utils/resources";
 import gsap from "gsap";
 
@@ -7,11 +7,19 @@ export const preloaderVisible = ref(true);
 export const usePreloader = () => {
   const progress = ref(0);
   const resourcesProgress = ref(0);
+  const handleResourceProgress = (newProgress: number) => {
+    resourcesProgress.value = newProgress;
+  };
 
   onMounted(() => {
-    resources.on("progress", (newProgress) => {
-      resourcesProgress.value = newProgress;
-    });
+    resources.on("progress", handleResourceProgress);
+    resourcesProgress.value = resources.isReady
+      ? 1
+      : resources.loaded / Math.max(1, resources.toLoad);
+  });
+
+  onUnmounted(() => {
+    resources.off("progress", handleResourceProgress);
   });
 
   watch(
@@ -25,7 +33,6 @@ export const usePreloader = () => {
   watch(
     progress,
     (newProgress) => {
-      const rect = document.querySelector(".preloader-rect") as HTMLElement;
       const preloader = document.querySelector(".preloader") as HTMLElement;
       if (newProgress === 1) {
         gsap.delayedCall(0.2, () => {
@@ -34,8 +41,6 @@ export const usePreloader = () => {
           preloaderVisible.value = false;
         });
       }
-
-      if (rect) rect.style.transform = `scaleY(${newProgress})`;
     },
     { immediate: true },
   );

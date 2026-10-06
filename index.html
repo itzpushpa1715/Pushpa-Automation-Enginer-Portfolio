@@ -50,17 +50,18 @@
         ></path>
       </defs>
     </svg>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
     <div id="app"></div>
     <div class="preloader">
-      <svg class="preloader-svg" viewBox="0 0 56 61" xmlns="http://www.w3.org/2000/svg">
-        <mask id="preloader-mask">
-          <rect fill="black" height="61" width="61"></rect>
-          <rect fill="white" height="61" width="61" class="preloader-rect" style="transform: scaleY(0)"></rect>
-        </mask>
-
-        <use href="#logo-path" class="preloader-path" opacity="0.3"></use>
-        <use href="#logo-path" class="preloader-path" mask="url(#preloader-mask)"></use>
-      </svg>
+      <video class="preloader-video" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+      <div class="preloader-scrim" aria-hidden="true"></div>
     </div>
     <script type="module" src="./src/main.ts"></script>
   </body>

@@ -3,7 +3,7 @@
 // cylinder setup, a screenshot of the TIA Portal ladder logic, or a short
 // video of the cylinder cycling, once available.
 
-import cubewar4 from "../../../assets/images/projects/cubewar/cubewar-4.webp";
+import cubewar4 from "../../../assets/images/projects/showcase/pneumatic-cylinder.svg";
 
 import type { ProjectContent } from "../../types";
 
@@ -14,10 +14,26 @@ export default {
   videoBorder: false,
   description:
     "A double-acting pneumatic cylinder controlled by a PLC using ladder logic, programmed in Siemens TIA Portal.<br/><br/>Set/Reset coils drive the solenoid valve to extend and retract the cylinder, with limit switches providing position feedback for safe, repeatable cycling.",
+  caseStudy: {
+    category: "PLC & Controls",
+    status: "completed",
+    overview:
+      "A PLC-controlled double-acting pneumatic cylinder with a solenoid valve and limit-switch feedback for extend and retract movements.",
+    problem:
+      "The cylinder must complete each movement in sequence and confirm its position before the next action is allowed.",
+    solution:
+      "Used Set/Reset ladder logic to control the valve state and limit-switch inputs to verify the cylinder position.",
+    process:
+      "Created the ladder logic and simulated I/O table in Siemens TIA Portal, then tested the extend and retract sequence against the position signals.",
+    results:
+      "Validated the extend/retract cycle with position feedback in a simulated I/O setup.",
+    technologies: ["PLC", "Ladder Logic", "Pneumatics"],
+    tools: ["Siemens TIA Portal", "Ladder Logic (LAD)", "Pneumatic control hardware"],
+  },
   heroImage: {
     src: cubewar4,
-    alt: "PLC-controlled pneumatic cylinder banner",
-    caption: "PLC pneumatic cylinder control visualization",
+    alt: "Illustrative PLC and pneumatic cylinder control schematic",
+    caption: "Illustrative sequence with directional valve and position feedback",
   },
   components: [
     {
@@ -25,8 +41,8 @@ export default {
       props: {
         type: "image",
         src: cubewar4,
-        alt: "PLC-controlled pneumatic cylinder banner",
-        caption: "PLC pneumatic cylinder control visualization",
+        alt: "Illustrative PLC and pneumatic cylinder control schematic",
+        caption: "Illustrative sequence with directional valve and position feedback",
       },
     },
     {

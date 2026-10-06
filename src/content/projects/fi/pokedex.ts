@@ -2,7 +2,7 @@
 // Replace the placeholder image below with a real screenshot of a Nexara
 // Fusion LinkedIn post or one of your SVG sketch illustrations once ready.
 
-import pokedex0 from "../../../assets/images/projects/pokedex/pokedex-0.webp";
+import pokedex0 from "../../../assets/images/projects/showcase/nexara-content.svg";
 
 import type { ProjectContent } from "../../types";
 
@@ -20,8 +20,8 @@ export default {
       props: {
         type: "image",
         src: pokedex0,
-        alt: "Placeholder image - replace with a Nexara Fusion LinkedIn post screenshot",
-        caption: "TODO: replace with a real Nexara Fusion post or SVG illustration",
+        alt: "Havainnekuva Nexara Fusionin PLC- ja IT/OT-sisältöaiheista",
+        caption: "Havainnollistava sisältötaulu, ei julkaistun postauksen kuvakaappaus",
       },
     },
     {

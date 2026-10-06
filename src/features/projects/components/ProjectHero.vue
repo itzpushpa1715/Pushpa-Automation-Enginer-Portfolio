@@ -22,28 +22,22 @@ watch(projectId, () => {
 
 <template>
   <div class="project-hero grid">
-    <div class="project-hero-top">
-      <div class="project-hero-title-wrapper">
-        <h1 class="project-hero-title" :key="animationKey">
-          {{ content.title }}
-        </h1>
-      </div>
-      <div class="project-hero-tags">
+    <div class="project-hero-meta">
+      <span v-if="content.caseStudy?.category" class="project-hero-category">
+        {{ content.caseStudy.category }}
+      </span>
+      <span v-if="content.caseStudy?.period">{{ content.caseStudy.period }}</span>
+      <span v-if="content.caseStudy?.status">{{ t(`project-status-${content.caseStudy.status}`) }}</span>
+      <div v-if="!content.caseStudy" class="project-hero-tags">
         <Tag v-for="tag in content.tags" :key="tag" :variant="tag" />
       </div>
     </div>
-    <div v-if="content.heroImage" class="project-hero-image-wrapper">
-      <img
-        :src="content.heroImage.src"
-        :alt="content.heroImage.alt"
-        class="project-hero-image"
-        loading="lazy"
-      />
-      <p v-if="content.heroImage.caption" class="project-hero-image-caption">
-        {{ content.heroImage.caption }}
-      </p>
+    <div class="project-hero-title-wrapper">
+      <h1 class="project-hero-title" :key="animationKey">
+        {{ content.title }}
+      </h1>
     </div>
-    <p class="project-hero-description" v-html="content.description"></p>
+    <p v-if="content.description" class="project-hero-description" v-html="content.description"></p>
     <div class="project-hero-buttons">
       <Link v-if="content.live" :href="content.live" external class="project-hero-button" data-cursor="arrow-external">
         <Button renderAs="div" variant="accent" class="children-unclickable" data-hoversound="hover">{{
@@ -68,11 +62,12 @@ watch(projectId, () => {
 <style scoped lang="scss">
 .project-hero {
   padding: 0 var(--space-outer);
-  padding-bottom: 48px;
-  padding-top: calc(var(--height-header) + 24px);
+  padding-top: calc(var(--height-header) + var(--space-xxl));
+  padding-bottom: var(--space-xxl);
 
   @include mixins.mq("md") {
-    padding-bottom: 64px;
+    padding-top: calc(var(--height-header) + var(--space-xxxl));
+    padding-bottom: var(--space-xxxl);
   }
 
   &-button {
@@ -84,26 +79,23 @@ watch(projectId, () => {
   }
 
   &-buttons {
-    grid-row: 3;
+    grid-row: 4;
     grid-column: 1 / 13;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: var(--space-sm);
     margin-top: var(--space-md);
     width: 100%;
-    grid-column: 1 / 13;
 
     @include mixins.mq("md") {
       gap: var(--space-md);
       width: fit-content;
-      grid-column: 1 / 6;
-      grid-row: 2;
-      margin-top: 0;
+      grid-column: 1 / 10;
     }
 
     @include mixins.mq("lg") {
-      grid-column: 2 / 6;
+      grid-column: 2 / 10;
     }
   }
 
@@ -127,14 +119,14 @@ watch(projectId, () => {
   }
 
   &-title {
-    font-size: var(--font-size-title-lg);
+    font-size: var(--font-size-title-md);
     color: var(--color-text-400);
     line-height: var(--line-height-title);
     transform: translateY(0%);
     animation: project-hero-title-visible 0.5s var(--ease-smooth);
 
     @include mixins.mq("md") {
-      font-size: var(--font-size-title-xl);
+      font-size: var(--font-size-title-xxl);
     }
 
     @keyframes project-hero-title-visible {
@@ -145,73 +137,55 @@ watch(projectId, () => {
         transform: translateY(0);
       }
     }
-
-    &-wrapper {
-      overflow: hidden;
-    }
   }
 
   &-description {
     color: var(--color-text-400);
     line-height: var(--line-height-copy);
+    grid-row: 3;
     grid-column: 1 / 13;
-    align-self: center;
+    align-self: start;
+    max-width: 760px;
+    font-size: var(--font-size-md);
 
     @include mixins.mq("md") {
-      grid-row: 1;
-      grid-column: 6 / 12;
+      grid-column: 1 / 10;
     }
 
     @include mixins.mq("lg") {
-      grid-row: 1;
-      grid-column: 7 / 12;
-    }
-
-    @include mixins.mq("xl") {
-      grid-row: 1;
-      grid-column: 7 / 11;
+      grid-column: 2 / 11;
     }
   }
 
-  &-top {
+  &-meta {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-lg);
     grid-row: 1;
-    align-self: top;
     grid-column: 1 / 13;
-
-    @include mixins.mq("md") {
-      grid-column: 1 / 6;
-    }
+    color: var(--color-text-300);
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
 
     @include mixins.mq("lg") {
-      grid-column: 2 / 6;
+      grid-column: 2 / 12;
     }
   }
 
-  &-image-wrapper {
+  &-category {
+    color: var(--color-orange-400);
+    font-weight: 700;
+  }
+
+  &-title-wrapper {
+    grid-row: 2;
     grid-column: 1 / 13;
-    margin-top: var(--space-xl);
+    overflow: hidden;
 
-    @include mixins.mq("md") {
-      grid-column: 1 / 13;
+    @include mixins.mq("lg") {
+      grid-column: 2 / 12;
     }
-  }
-
-  &-image {
-    width: 100%;
-    min-height: 220px;
-    max-height: 420px;
-    object-fit: cover;
-    border-radius: var(--radius-xxl);
-    display: block;
-  }
-
-  &-image-caption {
-    margin: 12px 0 0;
-    color: var(--color-text-300);
-    font-size: 14px;
   }
 }
 </style>

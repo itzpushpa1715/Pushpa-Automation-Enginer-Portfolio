@@ -5,7 +5,7 @@
 // run) once you have them. Until then this project renders with text-only
 // components so nothing breaks.
 
-import streakon0 from "../../../assets/images/projects/streakon/streakon-0.webp";
+import streakon0 from "../../../assets/images/projects/showcase/abb-cell.svg";
 
 import type { ProjectContent } from "../../types";
 
@@ -22,8 +22,8 @@ export default {
       props: {
         type: "image",
         src: streakon0,
-        alt: "Placeholder image - replace with ABB RobotStudio screenshot",
-        caption: "TODO: replace with a RobotStudio station / simulation screenshot",
+        alt: "Havainnekuva ABB:n robottisolusta",
+        caption: "Projektikuvaukseen perustuva havainnekuva, ei RobotStudio-kuvakaappaus",
       },
     },
     {

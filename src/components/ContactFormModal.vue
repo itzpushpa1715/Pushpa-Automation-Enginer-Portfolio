@@ -18,6 +18,10 @@ const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? "";
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? "";
 const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL ?? "pushpakoirala.work@gmail.com";
 const hasEmailJSConfig = Boolean(PUBLIC_KEY && SERVICE_ID && TEMPLATE_ID);
+const NETLIFY_HOSTS = ["pushpakoirala.com.np", "www.pushpakoirala.com.np"];
+
+const isNetlifySite = () =>
+  NETLIFY_HOSTS.includes(window.location.hostname) || window.location.hostname.endsWith(".netlify.app");
 
 const formData = ref({
   name: "",
@@ -35,12 +39,29 @@ const initEmailJS = () => {
   emailjs.init(PUBLIC_KEY);
 };
 
-const openMailClient = () => {
-  const subject = encodeURIComponent(formData.value.subject || "Contact Form Submission");
-  const body = encodeURIComponent(
-    `Name: ${formData.value.name}\nEmail: ${formData.value.email}\n\n${formData.value.message}`
-  );
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+const submitToNetlify = async () => {
+  if (!isNetlifySite()) {
+    throw new Error(`Use the live portfolio to send this message, or email ${CONTACT_EMAIL} directly.`);
+  }
+
+  const payload = new URLSearchParams({
+    "form-name": "contact",
+    name: formData.value.name,
+    email: formData.value.email,
+    subject: formData.value.subject || "Portfolio contact",
+    message: formData.value.message,
+    "bot-field": "",
+  });
+
+  const response = await fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: payload.toString(),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Netlify Forms returned ${response.status}`);
+  }
 };
 
 const handleSubmit = async () => {
@@ -54,53 +75,32 @@ const handleSubmit = async () => {
   submitStatus.value = "idle";
   errorMessage.value = "";
 
-  if (!hasEmailJSConfig) {
-    openMailClient();
+  try {
+    if (hasEmailJSConfig) {
+      initEmailJS();
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        to_email: CONTACT_EMAIL,
+        from_name: formData.value.name,
+        from_email: formData.value.email,
+        subject: formData.value.subject || "Portfolio contact",
+        message: formData.value.message,
+        reply_to: formData.value.email,
+      });
+    } else {
+      await submitToNetlify();
+    }
+
     submitStatus.value = "success";
+    formData.value = { name: "", email: "", subject: "", message: "" };
     setTimeout(() => {
       emit("close");
       submitStatus.value = "idle";
     }, 2000);
-    isSubmitting.value = false;
-    return;
-  }
-
-  try {
-    initEmailJS();
-
-    const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-      to_email: CONTACT_EMAIL,
-      from_name: formData.value.name,
-      from_email: formData.value.email,
-      subject: formData.value.subject || "Contact Form Submission",
-      message: formData.value.message,
-      reply_to: formData.value.email,
-    });
-
-    if (response.status === 200) {
-      submitStatus.value = "success";
-      // Reset form
-      formData.value = {
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      };
-      // Close modal after 2 seconds
-      setTimeout(() => {
-        emit("close");
-        submitStatus.value = "idle";
-      }, 2000);
-    } else {
-      throw new Error(`EmailJS returned status ${response.status}`);
-    }
   } catch (error) {
     console.error("Email send error:", error);
-    if (!hasEmailJSConfig) {
-      errorMessage.value = "EmailJS is not configured. Your mail client should open instead.";
-    } else {
-      errorMessage.value = "Failed to send message. Please try again or email directly.";
-    }
+    errorMessage.value = error instanceof Error
+      ? error.message
+      : `Failed to send message. Please try again or email ${CONTACT_EMAIL} directly.`;
     submitStatus.value = "error";
   } finally {
     isSubmitting.value = false;
@@ -137,11 +137,14 @@ const overlayClick = (e: MouseEvent) => {
         </Clickable>
       </div>
 
-      <form @submit.prevent="handleSubmit" class="contact-modal-form">
+      <form @submit.prevent="handleSubmit" class="contact-modal-form" name="contact" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact" />
+        <input type="text" name="bot-field" tabindex="-1" autocomplete="off" class="form-honeypot" aria-hidden="true" />
         <div class="form-group">
           <label for="name" class="form-label">{{ t("name") || "Name" }}</label>
           <input
             id="name"
+            name="name"
             v-model="formData.name"
             type="text"
             class="form-input"
@@ -155,6 +158,7 @@ const overlayClick = (e: MouseEvent) => {
           <label for="email" class="form-label">{{ t("email") || "Email" }}</label>
           <input
             id="email"
+            name="email"
             v-model="formData.email"
             type="email"
             class="form-input"
@@ -168,6 +172,7 @@ const overlayClick = (e: MouseEvent) => {
           <label for="subject" class="form-label">{{ t("subject") || "Subject" }}</label>
           <input
             id="subject"
+            name="subject"
             v-model="formData.subject"
             type="text"
             class="form-input"
@@ -180,6 +185,7 @@ const overlayClick = (e: MouseEvent) => {
           <label for="message" class="form-label">{{ t("message") || "Message" }}</label>
           <textarea
             id="message"
+            name="message"
             v-model="formData.message"
             class="form-textarea"
             placeholder="Your message here..."
@@ -313,6 +319,10 @@ const overlayClick = (e: MouseEvent) => {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.form-honeypot {
+  display: none;
 }
 
 .form-label {

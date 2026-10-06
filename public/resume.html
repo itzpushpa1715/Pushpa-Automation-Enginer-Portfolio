@@ -10,6 +10,7 @@
     .container{max-width:900px;margin:0 auto;background:#fff;padding:28px;border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.08)}
     h1{margin:0;font-size:28px}
     .meta{color:#555;margin-top:8px}
+    .headline{font-size:17px;font-weight:600;line-height:1.4;max-width:760px}
     .grid{display:grid;grid-template-columns:1fr 320px;gap:24px;margin-top:20px}
     .sidebar{background:#fbfbfb;padding:16px;border-radius:6px}
     .section{margin-bottom:18px}
@@ -26,6 +27,7 @@
     <div id="root">
       <header>
         <h1 id="name">Loading…</h1>
+        <p class="meta" id="headline"></p>
         <div class="meta" id="meta"></div>
       </header>
       <div class="grid">
@@ -33,6 +35,7 @@
           <section class="section" id="about"></section>
           <section class="section" id="education"></section>
           <section class="section" id="experience"></section>
+          <section class="section" id="certifications"></section>
         </main>
         <aside class="sidebar">
           <section class="section" id="skills"></section>
@@ -49,6 +52,7 @@ async function load(){
     if(!res.ok) throw new Error('Failed to fetch resume.json');
     const data = await res.json();
     document.getElementById('name').textContent = data.name || '';
+    document.getElementById('headline').textContent = data.headline || '';
     const meta = [];
     if(data.contact?.nationality) meta.push(data.contact.nationality);
     if(data.contact?.mobile) meta.push(data.contact.mobile);
@@ -63,7 +67,8 @@ async function load(){
       const el = document.getElementById('education');
       el.innerHTML = '<h2>Education & Training</h2>' + data.education.map(e => {
         const notes = (e.notes||[]).map(n=>`<li>${escapeHtml(n)}</li>`).join('');
-        return `<div class="list-row"><strong>${escapeHtml(e.degree)}</strong> — ${escapeHtml(e.institution)}<br>${escapeHtml(e.location)}${e.credits?` • Credits: ${e.credits}`:''}<ul>${notes}</ul></div>`
+        const credits = e.creditsCompleted ? `${escapeHtml(e.creditsCompleted)} / ${escapeHtml(e.credits)} credits completed` : (e.credits ? `Credits: ${escapeHtml(e.credits)}` : '');
+        return `<div class="list-row"><strong>${escapeHtml(e.degree)}</strong> — ${escapeHtml(e.institution)}<br>${escapeHtml(e.location||'')}${e.period?` • ${escapeHtml(e.period)}`:''}${e.status?` • ${escapeHtml(e.status)}`:''}${credits?` • ${credits}`:''}<ul>${notes}</ul></div>`
       }).join('');
     }
 
@@ -72,7 +77,15 @@ async function load(){
       const el = document.getElementById('experience');
       el.innerHTML = '<h2>Work Experience</h2>' + data.work_experience.map(w => {
         const resp = (w.responsibilities||[]).map(r=>`<li>${escapeHtml(r)}</li>`).join('');
-        return `<div class="list-row"><strong>${escapeHtml(w.role)}</strong> — ${escapeHtml(w.company)}<br>${escapeHtml(w.location||'')} ${w.start?` • ${w.start}`:''} ${w.end?`– ${w.end}`:''}${resp?`<ul>${resp}</ul>`:''}</div>`
+        return `<div class="list-row"><strong>${escapeHtml(w.role)}</strong> — ${escapeHtml(w.company)}${w.employment_type?` · ${escapeHtml(w.employment_type)}`:''}<br>${escapeHtml(w.location||'')} ${w.start?` • ${escapeHtml(w.start)}`:''} ${w.end?`– ${escapeHtml(w.end)}`:''}${resp?`<ul>${resp}</ul>`:''}</div>`
+      }).join('');
+    }
+
+    if(Array.isArray(data.certifications) && data.certifications.length){
+      const el = document.getElementById('certifications');
+      el.innerHTML = '<h2>Licenses & Certifications</h2>' + data.certifications.map(c => {
+        const dates = [c.issued && `Issued ${c.issued}`, c.expires && `Expires ${c.expires}`].filter(Boolean).map(escapeHtml).join(' · ');
+        return `<div class="list-row"><strong>${escapeHtml(c.name)}</strong> — ${escapeHtml(c.issuer||'')}${dates?`<br>${dates}`:''}${c.note?`<p>${escapeHtml(c.note)}</p>`:''}</div>`;
       }).join('');
     }
 

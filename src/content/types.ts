@@ -10,6 +10,18 @@ export interface ProjectContent {
   theme: "light" | "dark";
   tags: TagVariant[];
   description?: string;
+  caseStudy?: {
+    category: string;
+    period?: string;
+    status: "completed" | "in-progress" | "coursework" | "concept";
+    overview: string;
+    problem?: string;
+    solution: string;
+    process?: string;
+    results?: string;
+    technologies: string[];
+    tools: string[];
+  };
   heroImage?: {
     src: string;
     alt: string;

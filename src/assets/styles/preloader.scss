@@ -12,21 +12,20 @@
   transition: opacity 0.3s ease-in-out;
   opacity: 1;
 
-  &-svg {
-    width: 120px;
-    height: 120px;
-    transition:
-      transform 0.2s var(--ease-power2-in),
-      opacity 0.2s var(--ease-power2-in);
+  &-video,
+  &-scrim {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  &-rect {
-    transform-origin: bottom center;
-    transition: transform 0.3s ease-in-out;
+  &-video {
+    object-fit: cover;
   }
 
-  &-path {
-    fill: var(--color-text-400);
+  &-scrim {
+    background: rgba(18, 26, 29, 0.3);
   }
 
   &-hidden {
@@ -37,8 +36,7 @@
       pointer-events: none !important;
     }
 
-    svg {
-      transform: scale(0.4);
+    .preloader-video {
       opacity: 0;
     }
   }

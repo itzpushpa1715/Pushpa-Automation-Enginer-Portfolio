@@ -3,7 +3,7 @@
 // SVG sketch, or screenshot from your IT/OT integration content
 // (Modbus / OPC UA / AWS / historian) once you have a final asset.
 
-import quibbo0 from "../../../assets/images/projects/quibbo/quibbo-0.webp";
+import quibbo0 from "../../../assets/images/projects/showcase/it-ot-architecture.svg";
 
 import type { ProjectContent } from "../../types";
 
@@ -20,8 +20,8 @@ export default {
       props: {
         type: "image",
         src: quibbo0,
-        alt: "Placeholder image - replace with IT/OT architecture diagram",
-        caption: "TODO: replace with an IT/OT integration diagram or sketch",
+        alt: "Havainnekaavio OT-järjestelmistä historian- ja pilvipalveluihin",
+        caption: "Havainnollistava Modbus TCP- ja OPC UA -datapolku",
       },
     },
     {

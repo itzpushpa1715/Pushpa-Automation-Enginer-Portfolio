@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import HeaderLink from "./HeaderLink.vue";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { t } from "../i18n/utils/translate";
 import { lenis } from "../composables/useScroll";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,19 +12,22 @@ const handleLinkClick = (link: string) => {
   lenis.value.scrollTo(link);
 };
 
-type ActiveLink = "about" | "projects" | "contact";
+type ActiveLink = "about" | "projects" | "experience" | "education" | "blog" | "contact";
 const activeLink = ref<ActiveLink | null>(null);
-const sections: ActiveLink[] = ["about", "projects", "contact"];
-const ariaLabels = {
+const sections: ActiveLink[] = ["about", "projects", "experience", "education", "blog", "contact"];
+const ariaLabels = computed(() => ({
   about: t("about"),
   projects: t("projects"),
+  experience: t("experience"),
+  education: t("education"),
+  blog: t("profile-notes-title"),
   contact: t("contact"),
-};
+}));
 
 const isMounted = ref(false);
 
 const barStyle = ref({ transform: "" });
-const ITEM_WIDTH = 128;
+const ITEM_WIDTH = 112;
 
 const { isDarkTheme, hasScrolledIntoView } = useHeaderTheme();
 
@@ -86,7 +89,7 @@ onMounted(() => {
         data-sound="click"
         data-hoversound="hover"
       >
-        {{ t(section) }}
+        {{ ariaLabels[section] }}
       </HeaderLink>
     </div>
   </div>
@@ -142,7 +145,7 @@ onMounted(() => {
     top: 3px;
     left: 3px;
     height: calc(100% - 6px);
-    width: 128px;
+    width: 112px;
     background: var(--color-orange-400);
     border-radius: 100px;
     transition:
@@ -170,7 +173,7 @@ onMounted(() => {
     background: none;
     transition: color 0.1s ease-in-out;
     font-size: var(--font-size-md);
-    width: 128px;
+    width: 112px;
     white-space: nowrap;
     text-transform: uppercase;
 

@@ -9,79 +9,170 @@
     "linkedin": "pushpakoirala",
     "address": "Porslahdentie 24 G, 00980, Helsinki, Finland"
   },
-  "about": "Electrical, Automation and Robotics Engineering student with knowledge of programming, automation, robotics, and electrical engineering. Quick learner with strong problem-solving and teamwork skills.",
+  "headline": "Industrial Automation & Electrical | Control Systems | PLC | Building Automation | SCADA | VALMET DNA/DCS | Seeking Entry-Level Role in Finland",
+  "about": "Third-year Automation and Robotics Engineering student at JAMK University of Applied Sciences, with 153 of 240 credits completed and an estimated graduation in 2028. Studies include control systems, measurement technology, electrical engineering, electronics, functional safety, deep learning and robotics. Hands-on background includes C programming, PLC logic, building automation systems monitoring and industrial machine fabrication. Holds SFS 60002 electrical safety training (valid on JAMK premises; card pending) and an Occupational Safety Card, and has completed 12 credits of official practical training. Seeking an entry-level or trainee position in Finland in automation, electrical engineering, robotics or control systems.",
   "education": [
     {
-      "degree": "Electrical, Automation and Robotics Engineering",
-      "institution": "JAMK University of Applied Science",
-      "location": "Finland",
+      "degree": "Bachelor's Degree Programme in Automation and Robotics",
+      "institution": "JAMK University of Applied Sciences",
+      "location": "Jyväskylä, Finland",
+      "period": "2024–2027; estimated graduation 2028",
+      "status": "In progress",
       "notes": [
         "Bachelor's Degree Programme in Automation and Robotics",
-        "Knowledge of Siemens TIA Portal programming and PLC communication (TCP Modbus)",
-        "Experience with machine vision and deep learning",
-        "Basic programming skills in C and Python",
-        "Familiar with Git and GitLab"
+        "153 of 240 credits completed, as stated on LinkedIn",
+        "Studies cover control systems, measurement technology, electrical engineering, electronics, functional safety, deep learning and robotics",
+        "LinkedIn About lists 12 credits of official practical training"
       ],
-      "credits": 158
+      "creditsCompleted": 153,
+      "credits": 240
     }
   ],
   "work_experience": [
     {
-      "role": "AI Trainer",
-      "company": "Micro1",
-      "location": "Remote, Finland",
-      "start": "2026-07-29",
-      "end": "Current",
+      "role": "Founder",
+      "company": "Sumitra Software & Automation",
+      "employment_type": "Self-employed",
+      "location": "Chitwan District, Nepal · Hybrid",
+      "start": "Jul 2026",
+      "end": "Present",
       "responsibilities": [
-        "Analyze, interpret, and explain electrical schematics and control system documentation",
-        "Review, annotate, and validate technical materials",
-        "Evaluate electrical troubleshooting scenarios and document solutions",
-        "Assess technical manuals and field operation guides",
-        "Provide detailed feedback on documentation quality"
+        "Supporting a family-run building automation and software business from Finland.",
+        "The business describes services for property developers, facility managers and MEP contractors, including building control systems and custom software engineering."
       ]
     },
     {
-      "role": "Computer Hardware Technician",
-      "company": "A3Z Electronic Store",
-      "location": "Nepal",
-      "start": "2022-11-01",
-      "end": "2023-04-30"
+      "role": "AI Trainer — Electrical and Field Systems Operation Specialist",
+      "company": "micro1",
+      "employment_type": "Full-time",
+      "location": "Remote",
+      "start": "Jul 2026",
+      "end": "Present",
+      "responsibilities": [
+        "Evaluate and help train AI models using electrical and field-operations expertise.",
+        "Analyze and explain electrical schematics, wiring diagrams and control-system documentation.",
+        "Review equipment layouts, inspection reports, technical manuals and operating procedures.",
+        "Evaluate troubleshooting scenarios and document solutions using industry practice.",
+        "Provide feedback on documentation quality and communicate technical context asynchronously."
+      ]
     },
     {
-      "role": "Technician",
+      "role": "Housekeeper",
+      "company": "N-Clean",
+      "employment_type": "Part-time",
+      "location": "Finland · On-site",
+      "start": "May 2025",
+      "end": "May 2026",
+      "responsibilities": [
+        "Maintained cleanliness and hygiene in residential and commercial spaces.",
+        "Followed safety procedures when using cleaning equipment and materials.",
+        "Worked independently and as part of a team with attention to detail."
+      ]
+    },
+    {
+      "role": "Property Maintenance",
+      "company": "Visio Henkilöstöratkaisut",
+      "employment_type": "Contract",
+      "location": "Helsinki, Finland · On-site",
+      "start": "Jun 2025",
+      "end": "Aug 2025"
+    },
+    {
+      "role": "Factory Technician",
+      "company": "Inhouse Partners (work site: NovoPlastik Oy)",
+      "employment_type": "Contract",
+      "location": "Uusikaupunki, Finland · On-site",
+      "start": "Apr 2025",
+      "end": "Jun 2025",
+      "responsibilities": [
+        "Performed industrial cleaning of factory floors, machinery, storage areas and common spaces.",
+        "Handled waste and recycling, operated floor-polishing equipment and followed safety procedures."
+      ]
+    },
+    {
+      "role": "Property Maintenance",
+      "company": "Inhouse Partners",
+      "employment_type": "Contract",
+      "location": "Uusikaupunki, Finland",
+      "start": "Apr 2025",
+      "end": "May 2025"
+    },
+    {
+      "role": "Welder & Technician",
       "company": "SupaNirman Engineering & Construction PVT LTD.",
-      "location": "Nepal",
-      "start": "2023-05-01",
-      "end": "2024-08-30"
+      "employment_type": "Contract",
+      "location": "Bagmati, Nepal · On-site",
+      "start": "May 2023",
+      "end": "Aug 2024",
+      "responsibilities": [
+        "Worked on industrial machine fabrication and mechanical assemblies.",
+        "Supported machine installation, testing and commissioning.",
+        "Performed welding and assisted with predictive maintenance and production fault identification."
+      ]
+    },
+    {
+      "role": "Hardware Technician",
+      "company": "A3Z Electronic Store",
+      "employment_type": "Part-time",
+      "location": "Chitwan, Nepal · On-site",
+      "start": "Nov 2022",
+      "end": "Mar 2023",
+      "responsibilities": [
+        "Soldering and assembly of electronics and PCs.",
+        "Component-level repair, BIOS recovery, thermal management and software troubleshooting.",
+        "Repaired computer motherboards and electronic devices."
+      ]
+    },
+    {
+      "role": "Electrician Trainee",
+      "company": "Kharel Brother Pvt. Ltd.",
+      "employment_type": "Contract",
+      "location": "Chitwan, Nepal · On-site",
+      "start": "Jan 2022",
+      "end": "Aug 2022",
+      "responsibilities": [
+        "Assisted with electrical installation, maintenance and troubleshooting.",
+        "Read technical drawings, installed wiring and lighting, and conducted electrical tests and quality checks.",
+        "Followed site safety procedures."
+      ]
     }
   ],
+  "certifications": [
+    { "name": "Certificate of Participation — micro1 Frontier Engineering Challenge 2026", "issuer": "micro1", "issued": "Sep 2026" },
+    { "name": "Certified Talent", "issuer": "micro1", "credential": "Proof of Certification" },
+    { "name": "Electrical Safety Training — SFS 60002 standard", "issuer": "JAMK University of Applied Sciences", "expires": "Jan 2029", "note": "LinkedIn About says valid on JAMK premises; card pending." },
+    { "name": "FRC Emergency First Aid", "issuer": "Finnish Red Cross — Suomen Punainen Risti", "expires": "Jan 2029" },
+    { "name": "Occupational Safety Card", "issuer": "Työturvallisuus- ja tulityökoulutus Teppo Suominen", "expires": "Feb 2030" },
+    { "name": "Introduction to Building Automation", "issuer": "Metropolia University of Applied Sciences", "issued": "Dec 2025", "expires": "Jan 2026", "note": "Expired, as shown on LinkedIn." },
+    { "name": "Oracle Autonomous Database Cloud 2025 Certified Professional", "issuer": "Oracle", "issued": "Jul 2025", "expires": "Jul 2027" },
+    { "name": "Mine Robotics", "issuer": "University of Oulu", "credential": "MineRobotics.pdf" },
+    { "name": "Python", "issuer": "Simplilearn SkillUp", "issued": "Jun 2025", "credential": "Certificate code 8469258" },
+    { "name": "Invent for the Planet", "issuer": "Texas A&M University", "issued": "Nov 2024" }
+  ],
   "skills": [
-    "CI/CD Integration",
-    "MATLAB",
-    "PLC & HMI Programming",
-    "SCADA Programming",
-    "Valmet DNA",
-    "SQL",
-    "Python",
-    "Git",
-    "C#",
-    "Control systems",
+    "HMI Programming",
+    "Industrial Robotics",
     "Machine Vision",
+    "Electrical Engineering",
+    "Schematic Reading",
     "Deep Learning",
-    "LTSpice",
-    "Electrical CAD",
+    "Electrical Wiring",
+    "PLC Siemens",
+    "Computer Hardware Troubleshooting",
+    "Equipment Commissioning",
+    "Electronics Design",
     "Automation Systems",
-    "Robotics Fundamentals",
-    "Electrical Engineering Fundamentals",
-    "Electronics",
-    "Measurement Technology",
-    "Artificial Intelligence Basics",
-    "ABB RobotStudio",
-    "Functional Safety",
-    "Equipment Installation & Commissioning",
-    "NI LabVIEW & Insight Explorer",
-    "Wiring & Electrical Installation",
-    "Technical Drawing & Schematics Reading"
+    "PLC Programming (Siemens TIA Portal)",
+    "Control Systems Engineering",
+    "Industrial Automation",
+    "Building Automation Systems (BAS)",
+    "SCADA (WinCC)",
+    "Valmet DNA/DCS",
+    "RAPID / ABB RobotStudio",
+    "C / Python",
+    "Git / GitLab",
+    "Modbus TCP",
+    "Functional Safety"
   ],
   "languages": {
     "English": {

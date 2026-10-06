@@ -3,7 +3,7 @@
 // machine vision / deep learning coursework or a labeled image example
 // once available.
 
-import sharkie0 from "../../../assets/images/projects/sharkie/sharkie-0.webp";
+import sharkie0 from "../../../assets/images/projects/showcase/machine-vision.svg";
 
 import type { ProjectContent } from "../../types";
 
@@ -20,8 +20,8 @@ export default {
       props: {
         type: "image",
         src: sharkie0,
-        alt: "Placeholder image - replace with a machine vision project screenshot",
-        caption: "TODO: replace with a real machine vision / deep learning screenshot",
+        alt: "Havainnekuva konenäön käsittelyketjusta kuvankaappauksesta tarkastukseen",
+        caption: "Havainnollistava konenäön työnkulku",
       },
     },
     {

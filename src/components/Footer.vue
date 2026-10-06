@@ -41,6 +41,17 @@ const { withSocial = true } = defineProps<Props>();
           <div class="footer-top-links-legal">
             <Clickable renderAs="div">
               <Link
+                href="/resume.html"
+                class="footer-link"
+                :external="true"
+                data-cursor="circle-white"
+                data-sound="click"
+                data-hoversound="hover"
+                >{{ t("resume") }}</Link
+              >
+            </Clickable>
+            <Clickable renderAs="div">
+              <Link
                 :href="locale === 'fi' ? '/fi/privacy' : '/privacy'"
                 class="footer-link"
                 :external="true"

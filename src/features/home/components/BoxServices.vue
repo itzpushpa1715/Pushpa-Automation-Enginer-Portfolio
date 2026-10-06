@@ -107,23 +107,23 @@ const handleTimelineCreated = (timeline: gsap.core.Timeline, delay: number) => {
 };
 
 const SERVICES_EN = [
-  { name: "PLC & HMI Programming" },
-  { name: "Siemens TIA Portal" },
-  { name: "ABB RobotStudio (RAPID)" },
-  { name: "SCADA (WinCC, Valmet DNA)" },
-  { name: "MATLAB / Simulink" },
+  { name: "PLC Programming (Siemens TIA Portal)" },
+  { name: "Building Automation Systems (BAS)" },
+  { name: "SCADA (WinCC, Valmet DNA/DCS)" },
+  { name: "Industrial Robotics (ABB RobotStudio / RAPID)" },
+  { name: "Machine Vision & Deep Learning" },
 ] as const satisfies { name: string }[];
 
-const SERVICES_DE = [
-  { name: "SPS- & HMI-Programmierung" },
-  { name: "Siemens TIA Portal" },
-  { name: "ABB RobotStudio (RAPID)" },
-  { name: "SCADA (WinCC, Valmet DNA)" },
-  { name: "MATLAB / Simulink" },
+const SERVICES_FI = [
+  { name: "PLC-ohjelmointi (Siemens TIA Portal)" },
+  { name: "Rakennusautomaatiojärjestelmät (BAS)" },
+  { name: "SCADA (WinCC, Valmet DNA/DCS)" },
+  { name: "Teollisuusrobotiikka (ABB RobotStudio / RAPID)" },
+  { name: "Konenäkö ja syväoppiminen" },
 ] as const satisfies { name: string }[];
 
 const services = computed(() => {
-  return locale.value === "en" ? SERVICES_EN : SERVICES_DE;
+  return locale.value === "fi" ? SERVICES_FI : SERVICES_EN;
 });
 </script>
 

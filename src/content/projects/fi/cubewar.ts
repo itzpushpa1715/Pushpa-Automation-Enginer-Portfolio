@@ -3,7 +3,7 @@
 // cylinder setup, a screenshot of the TIA Portal ladder logic, or a short
 // video of the cylinder cycling, once available.
 
-import cubewar0 from "../../../assets/images/projects/cubewar/cubewar-0.webp";
+import cubewar0 from "../../../assets/images/projects/showcase/pneumatic-cylinder.svg";
 
 import type { ProjectContent } from "../../types";
 
@@ -20,8 +20,8 @@ export default {
       props: {
         type: "image",
         src: cubewar0,
-        alt: "Placeholder image - replace with TIA Portal ladder logic screenshot",
-        caption: "TODO: replace with a ladder logic (LAD) screenshot or cylinder photo",
+        alt: "Havainnekaavio PLC-ohjatusta pneumaattisylinteristä",
+        caption: "Havainnekaavio venttiilistä ja asentopalautteesta",
       },
     },
     {

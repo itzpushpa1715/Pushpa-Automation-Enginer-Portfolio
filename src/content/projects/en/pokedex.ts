@@ -2,7 +2,7 @@
 // Replace the placeholder image below with a real screenshot of a Nexara
 // Fusion LinkedIn post or one of your SVG sketch illustrations once ready.
 
-import pokedex3 from "../../../assets/images/projects/pokedex/pokedex-3.webp";
+import pokedex3 from "../../../assets/images/projects/showcase/nexara-content.svg";
 
 import type { ProjectContent } from "../../types";
 
@@ -14,10 +14,26 @@ export default {
   videoBorder: false,
   description:
     "Nexara Fusion is a technology content brand covering AI, electrical engineering, PLC programming, industrial automation, robotics, embedded systems, IoT, and Industry 4.0 for a technically fluent LinkedIn audience.<br/><br/>Content includes brand introductions, PLC and ladder logic explainers, and IT/OT architecture posts, each paired with original sketch-style SVG illustrations.",
+  caseStudy: {
+    category: "Technical Content",
+    status: "in-progress",
+    overview:
+      "A technical content project for Nexara Fusion, translating automation and engineering topics into concise LinkedIn posts with original visual material.",
+    problem:
+      "Complex automation topics need clear explanations that remain useful to a technically fluent audience while fitting a short-form content format.",
+    solution:
+      "Developed content around PLC and ladder logic, IT/OT architecture, robotics and related engineering topics, pairing posts with sketch-style illustrations.",
+    process:
+      "Select a technical topic, distil the key idea into an explanatory post, then create a supporting visual for the LinkedIn format.",
+    results:
+      "Created brand introductions, PLC explainers and IT/OT architecture posts for Nexara Fusion’s LinkedIn presence.",
+    technologies: ["PLC", "SCADA", "IT/OT", "Robotics"],
+    tools: ["LinkedIn", "Original sketch-style SVG illustrations"],
+  },
   heroImage: {
     src: pokedex3,
-    alt: "Nexara Fusion banner",
-    caption: "Nexara Fusion technical content and LinkedIn visual",
+    alt: "Illustrative board of Nexara Fusion PLC and IT/OT technical explainers",
+    caption: "Illustrative technical-content concepts, not published post screenshots",
   },
   components: [
     {
@@ -25,8 +41,8 @@ export default {
       props: {
         type: "image",
         src: pokedex3,
-        alt: "Nexara Fusion banner",
-        caption: "Nexara Fusion technical content and LinkedIn visual",
+        alt: "Illustrative board of Nexara Fusion PLC and IT/OT technical explainers",
+        caption: "Illustrative technical-content concepts, not published post screenshots",
       },
     },
     {
