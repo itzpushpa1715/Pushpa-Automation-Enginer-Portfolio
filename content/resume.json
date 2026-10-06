@@ -1,0 +1,94 @@
+{
+  "name": "Pushpa Koirala",
+  "contact": {
+    "nationality": "Nepalese",
+    "mobile": "+358408795424",
+    "email": "pushpakoirala.work@gmail.com",
+    "work_permit": "Finland",
+    "website": "https://www.pushpakoirala.com.np/",
+    "linkedin": "pushpakoirala",
+    "address": "Porslahdentie 24 G, 00980, Helsinki, Finland"
+  },
+  "about": "Electrical, Automation and Robotics Engineering student with knowledge of programming, automation, robotics, and electrical engineering. Quick learner with strong problem-solving and teamwork skills.",
+  "education": [
+    {
+      "degree": "Electrical, Automation and Robotics Engineering",
+      "institution": "JAMK University of Applied Science",
+      "location": "Finland",
+      "notes": [
+        "Bachelor's Degree Programme in Automation and Robotics",
+        "Knowledge of Siemens TIA Portal programming and PLC communication (TCP Modbus)",
+        "Experience with machine vision and deep learning",
+        "Basic programming skills in C and Python",
+        "Familiar with Git and GitLab"
+      ],
+      "credits": 158
+    }
+  ],
+  "work_experience": [
+    {
+      "role": "AI Trainer",
+      "company": "Micro1",
+      "location": "Remote, Finland",
+      "start": "2026-07-29",
+      "end": "Current",
+      "responsibilities": [
+        "Analyze, interpret, and explain electrical schematics and control system documentation",
+        "Review, annotate, and validate technical materials",
+        "Evaluate electrical troubleshooting scenarios and document solutions",
+        "Assess technical manuals and field operation guides",
+        "Provide detailed feedback on documentation quality"
+      ]
+    },
+    {
+      "role": "Computer Hardware Technician",
+      "company": "A3Z Electronic Store",
+      "location": "Nepal",
+      "start": "2022-11-01",
+      "end": "2023-04-30"
+    },
+    {
+      "role": "Technician",
+      "company": "SupaNirman Engineering & Construction PVT LTD.",
+      "location": "Nepal",
+      "start": "2023-05-01",
+      "end": "2024-08-30"
+    }
+  ],
+  "skills": [
+    "CI/CD Integration",
+    "MATLAB",
+    "PLC & HMI Programming",
+    "SCADA Programming",
+    "Valmet DNA",
+    "SQL",
+    "Python",
+    "Git",
+    "C#",
+    "Control systems",
+    "Machine Vision",
+    "Deep Learning",
+    "LTSpice",
+    "Electrical CAD",
+    "Automation Systems",
+    "Robotics Fundamentals",
+    "Electrical Engineering Fundamentals",
+    "Electronics",
+    "Measurement Technology",
+    "Artificial Intelligence Basics",
+    "ABB RobotStudio",
+    "Functional Safety",
+    "Equipment Installation & Commissioning",
+    "NI LabVIEW & Insight Explorer",
+    "Wiring & Electrical Installation",
+    "Technical Drawing & Schematics Reading"
+  ],
+  "languages": {
+    "English": {
+      "listening": "B2",
+      "reading": "B2",
+      "spoken_production": "B1",
+      "writing": "B1"
+    }
+  }
+}

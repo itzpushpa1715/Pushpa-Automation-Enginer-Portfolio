@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Edit Site Content</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial;background:#f6f7fb;padding:20px}
+    .wrap{max-width:1000px;margin:0 auto;background:#fff;padding:18px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+    textarea{width:100%;min-height:420px;font-family:monospace;font-size:13px}
+    .row{display:flex;gap:12px;align-items:center;margin-top:12px}
+    input[type=text]{flex:1;padding:8px}
+    button{padding:8px 12px}
+    .notice{color:#666;margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Edit Site Content</h1>
+    <div class="notice">This admin panel edits files under <code>content/*.json</code> and <code>public/*.json</code>. Use a secure token before publishing.</div>
+    <div class="row">
+      <input id="apiBase" type="text" placeholder="API base URL (leave empty to use relative path)" />
+    </div>
+    <div class="row">
+      <select id="keySelect"></select>
+      <input id="token" type="text" placeholder="Admin token (X-Admin-Token)" />
+      <button id="load">Load</button>
+      <button id="save">Save</button>
+      <button id="validate">Validate JSON</button>
+    </div>
+    <textarea id="editor">Loading…</textarea>
+    <div id="status" class="notice"></div>
+  </div>
+<script>
+function apiBaseFor(base){
+  if(!base) return '';
+  return base.replace(/\/+$/, '');
+}
+function keyUrl(base, key){
+  const b = apiBaseFor(base || window.__API_BASE__ || '');
+  if(!b) return '/api/content/' + encodeURIComponent(key);
+  return b + '/api/content/' + encodeURIComponent(key);
+}
+function keysUrl(base){
+  const b = apiBaseFor(base || window.__API_BASE__ || '');
+  if(!b) return '/api/keys';
+  return b + '/api/keys';
+}
+
+const editor = document.getElementById('editor');
+const status = document.getElementById('status');
+
+async function load(){
+  status.textContent = 'Loading...';
+  try{
+    const base = document.getElementById('apiBase').value.trim();
+    const sel = document.getElementById('keySelect');
+    const key = sel.value;
+    if(!key){ status.textContent='Select a key'; return }
+    const url = keyUrl(base, key);
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('Failed to fetch: '+res.status);
+    const data = await res.json();
+    editor.value = JSON.stringify(data, null, 2);
+    status.textContent = 'Loaded.';
+  }catch(err){
+    status.textContent = 'Error: '+err;
+  }
+}
+
+function validateJson(){
+  try{ JSON.parse(editor.value); status.textContent='Valid JSON.'; return true }catch(e){ status.textContent='Invalid JSON: '+e; return false }
+}
+
+async function save(){
+  if(!validateJson()) return;
+  const token = document.getElementById('token').value.trim();
+  if(!token){ status.textContent='Provide admin token.'; return }
+  status.textContent = 'Saving...';
+  try{
+    const base = document.getElementById('apiBase').value.trim();
+    const key = document.getElementById('keySelect').value;
+    const url = keyUrl(base, key);
+    const res = await fetch(url, { method:'PUT', headers:{ 'Content-Type':'application/json', 'X-Admin-Token': token }, body: editor.value });
+    const json = await res.json();
+    if(!res.ok) throw new Error(json.error || JSON.stringify(json));
+    status.textContent = 'Saved successfully.';
+  }catch(err){ status.textContent = 'Save failed: '+err }
+}
+
+async function loadKeys(){
+  status.textContent = 'Loading keys...';
+  try{
+    const base = document.getElementById('apiBase').value.trim();
+    const res = await fetch(keysUrl(base));
+    if(!res.ok) throw new Error('Failed to list keys: '+res.status);
+    const keys = await res.json();
+    const sel = document.getElementById('keySelect');
+    sel.innerHTML = '';
+    for(const k of keys){ const opt = document.createElement('option'); opt.value = k; opt.textContent = k; sel.appendChild(opt) }
+    status.textContent = 'Keys loaded.';
+  }catch(err){ status.textContent = 'Error loading keys: '+err }
+}
+
+document.getElementById('load').addEventListener('click', load);
+document.getElementById('validate').addEventListener('click', validateJson);
+document.getElementById('save').addEventListener('click', save);
+
+document.getElementById('apiBase').addEventListener('change', loadKeys);
+document.getElementById('keySelect').addEventListener('change', ()=>{ status.textContent=''; editor.value=''; });
+
+// load on open
+loadKeys().then(()=>{ const sel=document.getElementById('keySelect'); if(sel && sel.value) document.getElementById('load').click() }).catch(()=>{});
+</script>
+</body>
+</html>

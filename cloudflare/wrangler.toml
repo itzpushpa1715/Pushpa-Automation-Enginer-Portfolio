@@ -1,0 +1,14 @@
+name = "pushpa-resume-api"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# Your Cloudflare account id (filled automatically)
+account_id = "6799c45344f34e67b60689cd285604e8"
+
+[[kv_namespaces]]
+binding = "RESUME"
+id = "132b42794de845d1abbd1ac35368091e"
+
+# Example notes:
+# - Keep `ADMIN_TOKEN` as a Wrangler secret (do not commit it).
+# - To set the secret locally: `wrangler secret put ADMIN_TOKEN`

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resume — Pushpa Koirala</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#222}
+    body{margin:0;padding:24px;background:#f7f7f8}
+    .container{max-width:900px;margin:0 auto;background:#fff;padding:28px;border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.08)}
+    h1{margin:0;font-size:28px}
+    .meta{color:#555;margin-top:8px}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:24px;margin-top:20px}
+    .sidebar{background:#fbfbfb;padding:16px;border-radius:6px}
+    .section{margin-bottom:18px}
+    h2{font-size:18px;margin:0 0 8px 0}
+    ul{margin:0;padding-left:18px}
+    .skill{display:inline-block;background:#eef; color:#123;padding:6px 8px;margin:4px;border-radius:4px;font-size:13px}
+    .list-row{margin-bottom:8px}
+    a{color:#1565c0}
+    @media(max-width:880px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="root">
+      <header>
+        <h1 id="name">Loading…</h1>
+        <div class="meta" id="meta"></div>
+      </header>
+      <div class="grid">
+        <main>
+          <section class="section" id="about"></section>
+          <section class="section" id="education"></section>
+          <section class="section" id="experience"></section>
+        </main>
+        <aside class="sidebar">
+          <section class="section" id="skills"></section>
+          <section class="section" id="languages"></section>
+          <section class="section" id="links"></section>
+        </aside>
+      </div>
+    </div>
+  </div>
+<script>
+async function load(){
+  try{
+    const res = await fetch('/resume.json');
+    if(!res.ok) throw new Error('Failed to fetch resume.json');
+    const data = await res.json();
+    document.getElementById('name').textContent = data.name || '';
+    const meta = [];
+    if(data.contact?.nationality) meta.push(data.contact.nationality);
+    if(data.contact?.mobile) meta.push(data.contact.mobile);
+    if(data.contact?.email) meta.push(data.contact.email);
+    document.getElementById('meta').innerHTML = meta.join(' • ');
+
+    // About
+    if(data.about) document.getElementById('about').innerHTML = `<h2>About</h2><p>${escapeHtml(data.about)}</p>`;
+
+    // Education
+    if(Array.isArray(data.education) && data.education.length){
+      const el = document.getElementById('education');
+      el.innerHTML = '<h2>Education & Training</h2>' + data.education.map(e => {
+        const notes = (e.notes||[]).map(n=>`<li>${escapeHtml(n)}</li>`).join('');
+        return `<div class="list-row"><strong>${escapeHtml(e.degree)}</strong> — ${escapeHtml(e.institution)}<br>${escapeHtml(e.location)}${e.credits?` • Credits: ${e.credits}`:''}<ul>${notes}</ul></div>`
+      }).join('');
+    }
+
+    // Experience
+    if(Array.isArray(data.work_experience) && data.work_experience.length){
+      const el = document.getElementById('experience');
+      el.innerHTML = '<h2>Work Experience</h2>' + data.work_experience.map(w => {
+        const resp = (w.responsibilities||[]).map(r=>`<li>${escapeHtml(r)}</li>`).join('');
+        return `<div class="list-row"><strong>${escapeHtml(w.role)}</strong> — ${escapeHtml(w.company)}<br>${escapeHtml(w.location||'')} ${w.start?` • ${w.start}`:''} ${w.end?`– ${w.end}`:''}${resp?`<ul>${resp}</ul>`:''}</div>`
+      }).join('');
+    }
+
+    // Skills
+    if(Array.isArray(data.skills) && data.skills.length){
+      const el = document.getElementById('skills');
+      el.innerHTML = '<h2>Skills</h2>' + data.skills.map(s=>`<span class="skill">${escapeHtml(s)}</span>`).join(' ');
+    }
+
+    // Languages
+    if(data.languages){
+      const el = document.getElementById('languages');
+      el.innerHTML = '<h2>Languages</h2>' + Object.entries(data.languages).map(([lang, prof])=>`<div class="list-row"><strong>${escapeHtml(lang)}</strong><div>Listening: ${escapeHtml(prof.listening||'')}, Reading: ${escapeHtml(prof.reading||'')}, Spoken: ${escapeHtml(prof.spoken_production||'')}, Writing: ${escapeHtml(prof.writing||'')}</div></div>`).join('');
+    }
+
+    // Links
+    const links = [];
+    if(data.contact?.website) links.push(`<div><strong>Website:</strong> <a href="${escapeHtml(data.contact.website)}" target="_blank">${escapeHtml(data.contact.website)}</a></div>`);
+    if(data.contact?.email) links.push(`<div><strong>Email:</strong> <a href="mailto:${escapeHtml(data.contact.email)}">${escapeHtml(data.contact.email)}</a></div>`);
+    if(data.contact?.linkedin) links.push(`<div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/${escapeHtml(data.contact.linkedin)}" target="_blank">${escapeHtml(data.contact.linkedin)}</a></div>`);
+    document.getElementById('links').innerHTML = links.join('');
+
+  }catch(err){
+    document.getElementById('root').innerHTML = `<p style="color:#a00">Error loading resume: ${escapeHtml(String(err))}</p>`;
+  }
+}
+
+function escapeHtml(s){
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/\"/g,'&quot;')
+    .replace(/\'/g,'&#39;');
+}
+
+load();
+</script>
+</body>
+</html>
